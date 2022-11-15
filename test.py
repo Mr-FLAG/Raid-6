@@ -18,7 +18,7 @@ if __name__ == "__main__":
     controller = RAID6(num_data_disk, num_check_disk, chunk_size)
 
     # write data objects across storage nodes
-    test_obj = 'test.txt'
+    test_obj = '63B.txt'
     raid6_path = os.path.join(DATA_PATH, test_obj)
     # dir: raid6 data stored path
     dir = os.path.join(DATA_PATH, time.strftime('%Y-%m-%d-%H-%M-%S'))
@@ -33,7 +33,7 @@ if __name__ == "__main__":
     # rebuild lost redundancy
     controller.rebuild_data(dir, corrupted_disk)
     content = controller.read_from_disk(dir)
-    recover_file = "recovered.txt"
+    recover_file = "63B_re.txt"
     f = open(os.path.join(DATA_PATH, recover_file), 'wb')
     f.write(bytes(content))
     print("Recovered data stored in data/" + recover_file)

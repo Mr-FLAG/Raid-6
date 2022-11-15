@@ -17,21 +17,22 @@ if __name__ == "__main__":
     print("Num of Data Disk: " + str(num_data_disk))
     print("Num of Check Disk: " + str(num_check_disk))
     #print("Chunk size in bytes: "+ str(chunk_size))
-    print("\nRAID-6 scheme configuration initialized\n")
+    print("RAID-6 scheme configuration initialized")
+    if not os.path.exists("log"):
+        os.mkdir("log")
 
     for i in range(4):
         test_obj = file_seq[i]
-        os.mkdir(log_seq[i])
-
+        if not os.path.exists("log/" + log_seq[i]):
+            os.mkdir("log/" + log_seq[i])
         for chunk_size in chunk_size_seq:
             print("Chunk size in bytes: " + str(chunk_size))
-            write_path = log_seq[i] + "/write_" + str(num_data_disk + num_check_disk) + '_' + str(chunk_size) + "_2.txt"
-            rebuild_path = log_seq[i] + "/rebuild_" + str(num_data_disk + num_check_disk) + '_' + str(chunk_size) + "_2.txt"
-            read_path = log_seq[i] + "/read_" + str(num_data_disk + num_check_disk) + '_' + str(chunk_size) + "_2.txt"
+            write_path = "log/" + log_seq[i] + "/write_" + str(num_data_disk + num_check_disk) + '_' + str(chunk_size) + "_2.txt"
+            rebuild_path = "log/" + log_seq[i] + "/rebuild_" + str(num_data_disk + num_check_disk) + '_' + str(chunk_size) + "_2.txt"
+            read_path = "log/" + log_seq[i] + "/read_" + str(num_data_disk + num_check_disk) + '_' + str(chunk_size) + "_2.txt"
             write_log = open(write_path, "a")
             rebuild_log = open(rebuild_path, "a")
             read_log = open(read_path, "a")
-
 
             for j in range(5):
                 # Initialize RAID6 controller

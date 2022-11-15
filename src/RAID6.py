@@ -16,7 +16,7 @@ class RAID6(object):
         self.gf = GaloisField(num_data_disk = self.num_data_disk,
                               num_check_disk = self.num_check_disk)
 
-        self.data_disk_list  = list(range(self.num_data_disk))
+        self.data_disk_list = list(range(self.num_data_disk))
         self.check_disk_list = list(range(self.num_data_disk,
                                           self.num_data_disk+self.num_check_disk))
 
@@ -38,7 +38,6 @@ class RAID6(object):
         #print(file_size)
         # Total pieces of data segment
         num_of_pieces = math.ceil(file_size / self.stripe_size)
-        #print(num_of_pieces)
         # Total capacity of data
         total_capacity = num_of_pieces * self.stripe_size
         #print("total capacity: " + str(total_capacity))
@@ -103,8 +102,7 @@ class RAID6(object):
         '''
 
         if len(corrupted_disk_list) > self.num_check_disk:
-            print("failed to rebuild data due to excessive corrupted disks")
-            return -1
+            raise Exception("failed to rebuild data due to excessive corrupted disks")
 
         left_data = []
         left_parity = []
