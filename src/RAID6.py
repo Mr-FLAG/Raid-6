@@ -101,8 +101,6 @@ class RAID6(object):
         :param dir: disk directory
         :param corrupted_disk_list: corrupted disk
         '''
-        
-        input("\nPress Enter to rebuild lost data ...\n")
 
         if len(corrupted_disk_list) > self.num_check_disk:
             print("failed to rebuild data due to excessive corrupted disks")
