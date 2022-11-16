@@ -1,39 +1,23 @@
 # CE7490 Project RAID6
 
-CE7490 2019 Fall - Advanced Topics in Distributed System - Project 2: RAID-6 based distributed storage system
+CE7490 2022 Fall - Advanced Topics in Distributed System - Project 2: RAID-6 based distributed storage system
 
 ## Introduction
 [RAID](https://en.wikipedia.org/wiki/RAID) (Redundant Array of Independent Disks) is developed for the demand of rising the reliability, capacity and speed of storage systems. The level of RAID6 is an extension of RAID5 by adding another parity block, which is designed to tolerate any two concurrent disk failure and maintain a relatively high storage efficiency. An example of RAID6 storage with double parity is shown below:
 
 <p align="center">
-    <img src='https://linustechtips.com/main/uploads/monthly_09_2015/post-239070-0-22015900-1441472733.gif' width="400" height="250">
+    <img src='data/RAID4-6.drawio.png' width="400" height="250">
 </p>
 
 ## Installation Guide
-The RAID-6 system is devloped in Python 3.8 environment with corresponding dependencies.
+The RAID-6 system is devloped in Python 3.9 environment with dependencies math, numpy, os and time library.
 
-The project is supported on Linux and MacOS. It may be possible to install on Windows, though this hasn't been extensively tested.
+The project is supported on Linux and Windows using terminal / command line.
 
-### Installing Anaconda
-Anaconda is a library that includes Python and many useful packages, as well as an environment manager called conda that makes package management simple.
-
-Follow the [official instrutions](https://www.anaconda.com/distribution/) of Anaconda to install. Once it has been successfully installed, run the following command at terminal:
-
-```
-git clone https://github.com/GuluDeemo/CE7490-RAID6.git
-cd CE7490-RAID6
-conda env create -f environment.yml
-```
-
-To use Python from the environment you just created, activate the environment with
-
-```
-conda activate RAID6
-```
 
 ## Running Experiments
 
-The standard way to run the test from terminal is:
+The standard way to run the test from terminal / command line is:
 
 ```
 python test.py 
