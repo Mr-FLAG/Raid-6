@@ -23,7 +23,7 @@ The standard way to run the test from terminal / command line is:
 python test.py 
 ```
 
-The original file is stored in ```./data/file```. We have provided three kinds of file (.txt, .pdf, .jpg) for recovering test. Feel free to add your preferred file type and define your RAID6 configuration at ```./src/config.py ```.
+The test data file is stored in ```./data``` directory. 4 example files are provided, and you are free to add new file in this directory, only have to change the variable ```test_boj``` in the ```test.py```
 
 ## Reference
 An excellent tutorial of implementing RAID6 using Reed-Solomon coding can be found at http://www.cs.utk.edu/~plank/plank/papers/CS-96-332.html
