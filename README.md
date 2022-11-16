@@ -23,7 +23,11 @@ The standard way to run the test from terminal / command line is:
 python test.py 
 ```
 
-The test data file is stored in ```./data``` directory. 4 example files are provided, and you are free to add new file in this directory, only have to change the variable ```test_boj``` in the ```test.py```
+After the initialization of RAID6 and writing file into disks, you are required to input 1 to ```num_check_disk``` disks, which denotes the corrputed disks. These disks will be deleted and recovered, and the original file will be recovered. 
+
+You can check the recovered file in the ```./data``` directory.
+
+The test data file is stored in the ```./data``` directory. 4 example files are provided, and you are free to add new file in this directory. Only have to change the variable ```test_obj``` and ```recover_file``` in the ```test.py```, where they represent the name of the data file and recovered file.
 
 ## Reference
 An excellent tutorial of implementing RAID6 using Reed-Solomon coding can be found at http://www.cs.utk.edu/~plank/plank/papers/CS-96-332.html
