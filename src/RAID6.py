@@ -7,7 +7,7 @@ class RAID6(object):
     '''
     A class for RAID6 controller
     '''
-    def __init__(self, num_data_disk, num_check_disk, chunk_size):
+    def __init__(self, num_data_disk, num_check_disk, chunk_size, ram_size, file_dir):
         self.num_data_disk = num_data_disk
         self.num_check_disk = num_check_disk
         self.num_disk = self.num_data_disk + self.num_check_disk
@@ -19,13 +19,21 @@ class RAID6(object):
         self.data_disk_list = list(range(self.num_data_disk))
         self.check_disk_list = list(range(self.num_data_disk,
                                           self.num_data_disk+self.num_check_disk))
+        # added environment variables
+        self.ram_size = ram_size
+        self.file_dir = file_dir
+        self.batch = math.floor(self.ram_size/self.stripe_size)
+
+        if self.batch < 1:
+            raise Exception("ram_size has to be larger than the strip size (batch size * num_data_disk)")
 
         print("controller activated, ready to store data\n")
         #input("Press Enter to continue ...\n")
-    
+
     def read_data(self, filename, mode = 'rb'):
         f = open(filename, mode)
         return list(f.read())
+
     
     def distribute_data(self, filename):
         '''split data to different disk
@@ -40,11 +48,11 @@ class RAID6(object):
         num_of_pieces = math.ceil(file_size / self.stripe_size)
         # Total capacity of data
         total_capacity = num_of_pieces * self.stripe_size
-        #print("total capacity: " + str(total_capacity))
+        # print("total capacity: " + str(total_capacity))
         # Not full? zero-padding
         content = content + [0] * (total_capacity - file_size)
         content = np.asarray(content, dtype=int)
-        #data matrix
+        # data matrix
         content = content.reshape(self.num_data_disk,
                                   self.chunk_size * num_of_pieces)
         #print(content.shape[0])
@@ -76,6 +84,7 @@ class RAID6(object):
     def read_from_disk(self, dir):
         '''read data from each disk
         :param dir: disk directory
+
         '''
         content = []
         for i in range(self.num_data_disk):
@@ -111,6 +120,7 @@ class RAID6(object):
 
         for i in left_data_disk:
             left_data.append(self.read_data(os.path.join(dir, 'disk_' + str(i))))
+
         loop = 0
         num_of_sup = len(corrupted_disk_list)
         #print(num_of_sup)
