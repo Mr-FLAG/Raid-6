@@ -112,19 +112,19 @@ class RAID6(object):
         for i in left_data_disk:
             left_data.append(self.read_data(os.path.join(dir, 'disk_' + str(i))))
         loop = 0
-        num_of_sup = len(self.data_disk_list) - len(left_data_disk)
+        num_of_sup = len(corrupted_disk_list)
         #print(num_of_sup)
-        #If not enough corrupted disks, check_disk must be decreased.
+        #If not enough corrupted disks, to keep check_disk must be decreased.
         for j in left_check_disk:
             if loop < num_of_sup:
                 left_parity.append(self.read_data(os.path.join(dir, 'disk_' + str(j))))
                 loop += 1
 
         A = np.concatenate([np.eye(self.num_data_disk, dtype=int), self.gf.vander], axis=0)
+        #delete corrupted disks' corresponding matrix rows
         A_= np.delete(A, obj=corrupted_disk_list, axis=0)
-        #print(str(A_.shape[0]) + " " + str(A_.shape[1]))
-
-        # Modify A_ to be square matrix
+        # If corrupted disk is not enough, the matrix A_ will have more rows than columns
+        # We need to modify A_ to be square matrix
         while (len(A_) > len(A_[0])):
             A_= np.delete(A_, len(A_)-1, axis=0)
 
