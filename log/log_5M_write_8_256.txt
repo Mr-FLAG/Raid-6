@@ -1,0 +1,2 @@
+total_write_time= 15.67056918144226
+single_write_time= 0.026711697083095377
