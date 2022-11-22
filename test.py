@@ -20,6 +20,7 @@ if __name__ == "__main__":
     # write data objects across storage nodes
     test_obj = '63B.txt'
     raid6_path = os.path.join(DATA_PATH, test_obj)
+
     # dir: raid6 data stored path
     dir = os.path.join(DATA_PATH, time.strftime('%Y-%m-%d-%H-%M-%S'))
     os.mkdir(dir)
